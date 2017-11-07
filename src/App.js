@@ -20,21 +20,14 @@ class App extends Component {
 
   fetchPokemonData = async () => {
     try {
-      // const { data } = await axios.get(
-      //   `https://cors.now.sh/https://pokeapi.co/api/v2/pokemon/${this.state
-      //     .pokemonIdName}`
-      // )
-      // this.setState({ pokemonData: data })
-      // this.setState({ pokemonImg: data.sprites.front_default })
-      // this.setState({ pokemonName: this.capitalize(data.name) })
-      // console.log(this.state.pokemonData.sprites.front_default)
 
       const { data } = await axios.get(
         `https://cors.now.sh/https://pokeapi.co/api/v2/pokemon-species/${this
           .state.pokemonIdName}`
       )
       this.setState({ pokemonData: data })
-      this.setState({ pokemonName: data.names[0].name })
+      console.log(this.state.pokemonData)
+      this.setState({ pokemonName: data.names[2].name }) // find array for name using english
       this.setState({
         pokemonDescription: data.flavor_text_entries[1].flavor_text
       })
