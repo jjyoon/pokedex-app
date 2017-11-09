@@ -1,46 +1,50 @@
 import React, { Component } from 'react'
 import ReactAutocomplete from 'react-autocomplete'
+var EnglishPokemonList = require('./EnglishPokemonList').EnglishPokemonList
 
 
 
 class Search extends Component {
   state = {
       value: '',
+      pokemonList: EnglishPokemonList,
+  }
+
+  componentWillMount() {
+      var pokemonNameArray = this.state.pokemonList.map(function(item, index) {
+        index = index + 1
+        return { id: index, label: item }
+      })
+      this.setState({ pokemonList: pokemonNameArray })
   }
 
   render() {
     return (
-      // <div>
-      //   <input
-      //     placeholder="Pokemon Name or Number"
-      //     value={this.props.value}
-      //     onChange={this.props.onChange}
-      //     onKeyPress={this.props.onKeyPress}
-      //   />
-      //   <button type="submit" onClick={this.props.onClick}>
-      //     Search
-      //   </button>
-      // </div>
-      <ReactAutocomplete
-        items={[
-          { id: 'foo', label: 'foo' },
-          { id: 'bar', label: 'bar' },
-          { id: 'baz', label: 'baz' },
-        ]}
-        shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
-        getItemValue={item => item.label}
-        renderItem={(item, highlighted) =>
-          <div
-            key={item.id}
-            style={{ backgroundColor: highlighted ? '#eee' : 'transparent'}}
-          >
-            {item.label}
-          </div>
-        }
-        value={this.state.value}
-        onChange={e => this.setState({ value: e.target.value })}
-        onSelect={value => this.setState({ value })}
-      />
+      <div>
+
+
+        <ReactAutocomplete
+          items={this.state.pokemonList}
+          shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
+          getItemValue={item => item.label}
+          renderItem={(item, highlighted) =>
+            <div
+              key={item.id}
+              style={{ backgroundColor: highlighted ? '#eee' : 'transparent'}}
+            >
+              {item.label}
+            </div>
+          }
+          value={this.props.value}
+          onChange={this.props.onChange}
+          onSelect={this.props.onSelect}
+          onKeyPress={this.props.onKeyPress}
+        />
+
+        <button type="submit" onClick={this.props.onClick}>
+          Search
+        </button>
+      </div>
     )
   }
 }

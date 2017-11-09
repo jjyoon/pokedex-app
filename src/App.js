@@ -6,7 +6,7 @@ import Search from './components/Search'
 
 class App extends Component {
   state = {
-    pokemonIdName: 'bulbasaur',
+    pokemonIdName: 'Mewtwo',
     pokemonData: [],
     pokemonName: '',
     pokemonImg: '',
@@ -22,7 +22,7 @@ class App extends Component {
     try {
 
       const { data } = await axios.get(
-        `https://cors.now.sh/https://pokeapi.co/api/v2/pokemon-species/${this
+        `https://pokeapi.co/api/v2/pokemon-species/${this
           .state.pokemonIdName}`
       )
       this.setState({ pokemonData: data })
@@ -51,6 +51,12 @@ class App extends Component {
     }
   }
 
+  handleSelect = async event => {
+    console.log(event)
+    await this.setState({ pokemonIdName: event })
+    this.fetchPokemonData()
+  }
+
   render() {
     return (
       <div className="App">
@@ -66,6 +72,7 @@ class App extends Component {
           onChange={this.handleSearchChange}
           onClick={this.handleSearch}
           onKeyPress={this.handleEnterPress}
+          onSelect={this.handleSelect}
         />
         <div className="Pokemon-content">
           <p>{this.state.pokemonData.id}</p>
