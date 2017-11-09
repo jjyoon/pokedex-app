@@ -51,10 +51,10 @@ class App extends Component {
     }
   }
 
-  handleSelect = async event => {
-    console.log(event)
-    await this.setState({ pokemonIdName: event })
-    this.fetchPokemonData()
+  handleSelect = async (event, data) => {
+    console.log(data.id)
+    await this.setState({ pokemonIdName: data.id })
+    // this.fetchPokemonData()
   }
 
   render() {

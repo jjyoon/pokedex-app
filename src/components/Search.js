@@ -21,8 +21,6 @@ class Search extends Component {
   render() {
     return (
       <div>
-
-
         <ReactAutocomplete
           items={this.state.pokemonList}
           shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
