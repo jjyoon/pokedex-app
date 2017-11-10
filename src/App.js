@@ -6,7 +6,7 @@ import Search from './components/Search'
 
 class App extends Component {
   state = {
-    pokemonIdName: 'Mewtwo',
+    pokemonIdName: 'mewtwo',
     pokemonData: [],
     pokemonName: '',
     pokemonImg: '',
@@ -22,7 +22,7 @@ class App extends Component {
     try {
 
       const { data } = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon-species/${this
+        `https://cors.now.sh/https://pokeapi.co/api/v2/pokemon-species/${this
           .state.pokemonIdName}`
       )
       this.setState({ pokemonData: data })
