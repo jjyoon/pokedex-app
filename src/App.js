@@ -26,14 +26,26 @@ class App extends Component {
           .state.pokemonIdName}`
       )
       this.setState({ pokemonData: data })
-      console.log(this.state.pokemonData)
-      this.setState({ pokemonName: data.names[2].name }) // find array for name using english
-      this.setState({
-        pokemonDescription: data.flavor_text_entries[1].flavor_text
-      })
+      // console.log(this.state.pokemonData);
+      this.findEnglishVersion()
+
     } catch (e) {
       console.log('the error was', e)
     }
+  }
+
+  findEnglishVersion = () => {
+    const dataArray = this.state.pokemonData
+
+    const englishName = dataArray.names.find(function(item, index) {
+      return item.language.name === 'en'
+    })
+    this.setState({ pokemonName: englishName.name })
+
+    const englishDescription = dataArray.flavor_text_entries.find(function(item,index) {
+      return item.language.name === 'en'
+    })
+    this.setState({ pokemonDescription: englishDescription.flavor_text })
   }
 
   handleSearchChange = event => {
