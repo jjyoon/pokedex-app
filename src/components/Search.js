@@ -13,7 +13,7 @@ class Search extends Component {
   componentWillMount() {
       var pokemonNameArray = this.state.pokemonList.map(function(item, index) {
         index = index + 1
-        return { id: index, label: item }
+        return { id: index, label: index + '. ' + item }
       })
       this.setState({ pokemonList: pokemonNameArray })
   }
