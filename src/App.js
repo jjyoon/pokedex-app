@@ -7,7 +7,7 @@ import Search from './components/Search'
 class App extends Component {
   state = {
     pokemonData: [],
-    pokemonId: 150,
+    pokemonId: parseInt(window.location.pathname.slice(1)) || 150,
     pokemonName: '',
     pokemonIdAndName: '',
     pokemonImg: '',
@@ -16,29 +16,36 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.fetchPokemonData()
+    if (this.state.pokemonId) {
+      this.fetchPokemonData()
+    }
   }
 
   fetchPokemonData = async () => {
     try {
-
       this.setState({ loading: true })
+      const pokemon = localStorage.getItem(`${this.state.pokemonId}`)
+      if (pokemon) {
+        var data = JSON.parse(pokemon)
+      } else {
+        var { data } = await axios.get(
+          `https://cors.now.sh/https://pokeapi.co/api/v2/pokemon-species/${
+            this.state.pokemonId
+          }`
+        )
+        localStorage.setItem(`${this.state.pokemonId}`, JSON.stringify(data))
+      }
 
-      const { data } = await axios.get(
-        `https://cors.now.sh/https://pokeapi.co/api/v2/pokemon-species/${this
-          .state.pokemonId}`
-      )
       await this.setState({ pokemonData: data })
       // console.log(this.state.pokemonData);
       await this.findEnglishVersion()
 
       await this.setState({
         pokemonIdAndName: data.id + '. ' + this.state.pokemonName,
-        pokemonId: data.id,
+        pokemonId: data.id
       })
 
       await this.setState({ loading: false })
-
     } catch (e) {
       console.log('the error was', e)
     }
@@ -52,7 +59,10 @@ class App extends Component {
     })
     this.setState({ pokemonName: englishName.name })
 
-    const englishDescription = dataArray.flavor_text_entries.find(function(item,index) {
+    const englishDescription = dataArray.flavor_text_entries.find(function(
+      item,
+      index
+    ) {
       return item.language.name === 'en'
     })
     this.setState({ pokemonDescription: englishDescription.flavor_text })
@@ -81,26 +91,6 @@ class App extends Component {
   }
 
   render() {
-
-    const isLoading = this.state.loading
-
-    let PokemonContent = null
-    if (isLoading) {
-      PokemonContent = <h1>loading!</h1>
-    } else {
-      PokemonContent = (
-        <div>
-        <p>{this.state.pokemonId}</p>
-        <p>{this.state.pokemonName}</p>
-        <p>{this.state.pokemonDescription}</p>
-        <img
-          src={`/assets/sprites/${this.state.pokemonData.id}.png`}
-          alt={this.state.pokemonName}
-        />
-        </div>
-      )
-    }
-
     return (
       <div className="App">
         <header className="App-header">
@@ -118,7 +108,19 @@ class App extends Component {
           onSelect={this.handleSelect}
         />
         <div className="Pokemon-content" loading={this.state.loading}>
-          {PokemonContent}
+          {this.state.isLoading ? (
+            <h1>Loading!</h1>
+          ) : (
+            <div>
+              <p>{this.state.pokemonId}</p>
+              <p>{this.state.pokemonName}</p>
+              <p>{this.state.pokemonDescription}</p>
+              <img
+                src={`/assets/sprites/${this.state.pokemonData.id}.png`}
+                alt={this.state.pokemonName}
+              />
+            </div>
+          )}
         </div>
       </div>
     )
