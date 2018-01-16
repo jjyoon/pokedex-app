@@ -96,29 +96,35 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
+          <Search
+            className="c-search"
+            value={this.state.pokemonIdAndName}
+            onChange={this.handleSearchChange}
+            onClick={this.handleSearch}
+            onKeyPress={this.handleEnterPress}
+            onSelect={this.handleSelect}
+          />
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <Search
-          value={this.state.pokemonIdAndName}
-          onChange={this.handleSearchChange}
-          onClick={this.handleSearch}
-          onKeyPress={this.handleEnterPress}
-          onSelect={this.handleSelect}
-        />
-        <div className="Pokemon-content" loading={this.state.loading}>
+        <div
+          className="c-pokemon-content-container"
+          loading={this.state.loading}
+        >
           {this.state.isLoading ? (
             <h1>Loading!</h1>
           ) : (
-            <div>
-              <p>{this.state.pokemonId}</p>
-              <p>{this.state.pokemonName}</p>
-              <p>{this.state.pokemonDescription}</p>
-              <img
-                src={`/assets/sprites/${this.state.pokemonData.id}.png`}
-                alt={this.state.pokemonName}
-              />
+            <div className="pokemon-content">
+              <figure className="pokemon-image-container">
+                <img
+                  className="pokemon-image"
+                  src={`/assets/sprites/${this.state.pokemonData.id}.png`}
+                  alt={this.state.pokemonName}
+                />
+              </figure>
+              <div className="pokemon-content__text-description">
+                <p>{this.state.pokemonId}</p>
+                <p>{this.state.pokemonName}</p>
+                <p>{this.state.pokemonDescription}</p>
+              </div>
             </div>
           )}
         </div>

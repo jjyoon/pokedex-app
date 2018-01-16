@@ -23,6 +23,35 @@
 }
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.c-pokemon-content-container {
+  width: 80%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.pokemon-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.pokemon-image-container {
+  width: 50%;
+}
+
+.pokemon-image {
+  width: 100%;
+  height: auto;
+}
+
+.pokemon-content__text-description {
+  width: 50%;
+  text-align: left;
 }
