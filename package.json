@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.2",
+    "normalize.css": "^7.0.0",
     "react": "^16.0.0",
     "react-autocomplete": "^1.7.2",
-    "react-dom": "^16.0.0"
+    "react-dom": "^16.0.0",
+    "styled-components": "^2.4.0"
   },
   "devDependencies": {
     "react-scripts": "1.0.14"

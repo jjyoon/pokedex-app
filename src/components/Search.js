@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReactAutocomplete from 'react-autocomplete'
 // var EnglishPokemonList = require('./EnglishPokemonList').EnglishPokemonList
 import { EnglishPokemonList } from './EnglishPokemonList'
+import styled from 'styled-components'
 
 class Search extends Component {
   state = {
@@ -19,7 +20,7 @@ class Search extends Component {
 
   render() {
     return (
-      <div>
+      <SearchBarContainer>
         <ReactAutocomplete
           items={this.state.pokemonList}
           shouldItemRender={(item, value) =>
@@ -40,12 +41,26 @@ class Search extends Component {
           onKeyPress={this.props.onKeyPress}
         />
 
-        <button type="submit" onClick={this.props.onClick}>
-          Search
-        </button>
-      </div>
+        <SearchButton type="submit" onClick={this.props.onClick} className="c-search__button">
+          Go
+        </SearchButton>
+      </SearchBarContainer>
     )
   }
 }
+
+const SearchButton = styled.button`
+  background: green;
+  color: #fff;
+  border-radius: 10px;
+  margin-left: -40px;
+  overflow: hidden;
+`
+
+const SearchBarContainer = styled.div`
+  color: black;
+  overflow: hidden;
+  border-radius: 10px;
+`
 
 export default Search

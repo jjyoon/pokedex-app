@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import 'normalize.css'
 import axios from 'axios'
 import Search from './components/Search'
 
@@ -45,6 +46,8 @@ class App extends Component {
         pokemonId: data.id
       })
 
+      await window.history.pushState(null, null, this.state.pokemonId)
+
       await this.setState({ loading: false })
     } catch (e) {
       console.log('the error was', e)
@@ -85,6 +88,7 @@ class App extends Component {
 
   handleSelect = async (event, data) => {
     console.log(data.id)
+    // await this.setState({ loading: true })
     await this.setState({ pokemonIdAndName: data.label })
     await this.setState({ pokemonId: data.id })
     this.fetchPokemonData()
@@ -95,9 +99,8 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Pokedex</h1>
           <Search
-            className="c-search"
             value={this.state.pokemonIdAndName}
             onChange={this.handleSearchChange}
             onClick={this.handleSearch}
@@ -109,7 +112,7 @@ class App extends Component {
           className="c-pokemon-content-container"
           loading={this.state.loading}
         >
-          {this.state.isLoading ? (
+          {this.state.loading ? (
             <h1>Loading!</h1>
           ) : (
             <div className="pokemon-content">
@@ -132,5 +135,6 @@ class App extends Component {
     )
   }
 }
+
 
 export default App
