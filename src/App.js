@@ -138,7 +138,7 @@ class App extends Component {
 									alt={this.state.pokemonName}
 								/>
 								<Palette
-									image={`/assets/sprites/${this.state.pokemonData.id}.png`}
+									image={`assets/sprites/${this.state.pokemonData.id}.png`}
 								>
 									{palette => (
 										<div
