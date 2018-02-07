@@ -134,7 +134,7 @@ class App extends Component {
 							<figure className="pokemon-image-container">
 								<img
 									className="pokemon-image"
-									src={`/assets/sprites/${this.state.pokemonData.id}.png`}
+									src={`assets/sprites/${this.state.pokemonData.id}.png`}
 									alt={this.state.pokemonName}
 								/>
 								<Palette
@@ -158,7 +158,7 @@ class App extends Component {
 								<p className="pokemon-content__name">
 									{this.state.pokemonName}
 									<Palette
-										image={`/assets/sprites/${this.state.pokemonData.id}.png`}
+										image={`assets/sprites/${this.state.pokemonData.id}.png`}
 									>
 										{palette => (
 											<span
