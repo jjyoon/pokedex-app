@@ -1,0 +1,231 @@
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,800");
+
+$mobile-width: 300px;
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+@mixin mobile {
+	@media (min-width: #{$mobile-width}) and (max-width: #{$tablet-width - 1px}) {
+		@content;
+	}
+}
+
+@mixin tablet {
+	@media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media (min-width: #{$desktop-width}) {
+		@content;
+	}
+}
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Nunito", sans-serif;
+}
+
+.App {
+	text-align: center;
+}
+
+.App-logo {
+	// animation: App-logo-spin infinite 20s linear;
+	height: 50px;
+}
+
+.App-header {
+	position: relative;
+	background-color: #fa3c53;
+	height: 80px;
+	padding: 0 20px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	color: white;
+}
+
+.App-title {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0;
+	font-size: 1.5em;
+	// @include mobile {
+	// 	left: auto;
+	// 	right: 0;
+	// }
+}
+
+.App-intro {
+	font-size: large;
+}
+
+@keyframes App-logo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.c-search {
+	position: relative;
+	color: black;
+	text-align: left;
+
+	@include mobile {
+		position: absolute;
+		z-index: 10;
+		bottom: 0;
+		left: 50%;
+		transform: translate(-50%, 95%);
+	}
+
+	input {
+		position: relative;
+		height: 50px;
+		width: 280px;
+		padding-left: 20px;
+		border: 3px solid #fa3c53;
+		border-radius: 25px;
+		font-family: "Nunito", sans-serif;
+		@include mobile {
+			border-radius: 5px 5px 25px 25px;
+		}
+	}
+}
+
+.c-search__button {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	right: 7px;
+	height: 36px;
+	width: 70px;
+	background: #21d37a;
+	color: #fff;
+	border: none;
+	border-radius: 20px;
+	font-family: "Nunito", sans-serif;
+	text-transform: uppercase;
+}
+
+.searching-title {
+	width: 100%;
+	text-align: center;
+}
+
+.c-pokemon-content-container {
+	height: calc(100vh - 75px);
+	min-height: fit-content;
+	width: 80%;
+	max-width: 1200px;
+	display: flex;
+	align-items: center;
+	margin: 0 auto;
+	@include mobile {
+		height: auto;
+		align-items: flex-start;
+		margin-top: 60px;
+	}
+}
+
+.pokemon-content {
+	display: flex;
+	flex-direction: row;
+	@include mobile {
+		flex-direction: column;
+	}
+}
+
+.pokemon-image-container {
+	position: relative;
+	width: 50%;
+	padding: 10px;
+	margin: 0 40px 0 0;
+	@include mobile {
+		width: 100%;
+		padding: 0;
+		padding-bottom: 50%;
+		margin: 0;
+	}
+}
+
+.pokemon-image {
+	position: relative;
+	z-index: 5;
+	width: 100%;
+	height: auto;
+	margin: 40px auto;
+	filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.75));
+	@include mobile {
+		position: absolute;
+		height: 80%;
+		width: auto;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		margin: 0;
+	}
+}
+
+.pokemon-image__background-color {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	height: 100%;
+	width: 100%;
+	border: 3px solid;
+	border-radius: 10px;
+	@include mobile {
+		height: 100%;
+	}
+}
+
+.pokemon-content__text-description {
+	color: #4a4a4a;
+	width: 50%;
+	text-align: left;
+	@include mobile {
+		width: 100%;
+		margin-top: 20px;
+	}
+}
+
+.pokemon-content__number {
+	margin: 0 0 10px 0;
+	font-size: 24px;
+	font-weight: 800;
+}
+
+.pokemon-content__name {
+	position: relative;
+	z-index: 10;
+	font-size: 48px;
+	font-weight: 800;
+	margin: 0;
+	display: inline-block;
+}
+
+.pokemon-name__background-color {
+	position: absolute;
+	z-index: -1;
+	top: 50%;
+	left: -5%;
+	transform: translateY(-50%);
+	height: 40%;
+	width: 110%;
+}
+
+.pokemon-content__description {
+	font-size: 16px;
+}
