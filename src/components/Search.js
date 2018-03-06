@@ -11,10 +11,12 @@ class Search extends Component {
 	};
 
 	componentWillMount() {
-		var pokemonNameArray = this.state.pokemonList.map(function(item, index) {
-			index = index + 1;
-			return { id: index, label: index + ". " + item };
-		});
+		var pokemonNameArray = this.state.pokemonList
+			.slice(0, 151) // only up to first 150 pokemon
+			.map(function(item, index) {
+				index = index + 1;
+				return { id: index, label: index + ". " + item };
+			});
 		this.setState({ pokemonList: pokemonNameArray });
 	}
 

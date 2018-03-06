@@ -9,7 +9,7 @@ import Palette from "react-palette";
 class App extends Component {
 	state = {
 		pokemonData: [],
-		pokemonId: parseInt(window.location.pathname.slice(1)) || 150,
+		pokemonId: 150,
 		pokemonName: "",
 		pokemonIdAndName: "",
 		pokemonImg: "",
@@ -31,7 +31,8 @@ class App extends Component {
 				var data = JSON.parse(pokemon);
 			} else {
 				var { data } = await axios.get(
-					`https://cors.now.sh/https://pokeapi.co/api/v2/pokemon-species/${
+					`http://pokeapi.salestock.net/api/v2/pokemon-species/${
+						// might need to fix all this CORS stuff later
 						this.state.pokemonId
 					}`
 				);
@@ -47,7 +48,7 @@ class App extends Component {
 				pokemonId: data.id
 			});
 
-			await window.history.pushState(null, null, this.state.pokemonId);
+			// await window.history.pushState(null, null, this.state.pokemonId);
 
 			await this.setState({ loading: false });
 
@@ -87,7 +88,7 @@ class App extends Component {
 	};
 
 	handleSearchChange = event => {
-		console.log(this.state.pokemonIdAndName);
+		// console.log(this.state.pokemonIdAndName);
 		this.setState({ pokemonIdAndName: event.target.value });
 	};
 
@@ -102,7 +103,7 @@ class App extends Component {
 	};
 
 	handleSelect = async (event, data) => {
-		console.log(data.id);
+		// console.log(data.id);
 		// await this.setState({ loading: true })
 		await this.setState({ pokemonIdAndName: data.label });
 		await this.setState({ pokemonId: data.id });
